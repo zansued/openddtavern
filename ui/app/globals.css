@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-tavern-dark text-slate-100;
+}
+
+::selection {
+  background: rgba(155, 135, 245, 0.35);
+}
