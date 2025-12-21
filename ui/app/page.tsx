@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
 
 const shortcuts = [
   {
-    title: "Personagem (Demo)",
-    description: "Veja uma ficha de personagem com dados mockados.",
-    href: "/personagem/demo"
+    title: "Criar personagem",
+    description: "Comece uma nova ficha e registre seus heróis.",
+    href: "/personagens/novo"
   },
   {
     title: "Campanhas",
@@ -18,15 +19,48 @@ const shortcuts = [
   }
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = createClient();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
   return (
     <section className="space-y-6">
       <div className="rounded-2xl border border-white/10 bg-tavern-surface p-6">
-        <h2 className="text-2xl font-semibold">Dashboard</h2>
-        <p className="mt-2 text-sm text-tavern-muted">
-          Este é um MVP da interface do Open D&D Tavern. Navegue pelos atalhos
-          abaixo para experimentar o fluxo principal.
-        </p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold">Dashboard</h2>
+            <p className="mt-2 text-sm text-tavern-muted">
+              Este é um MVP da interface do Open D&D Tavern. Navegue pelos
+              atalhos abaixo para experimentar o fluxo principal.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-tavern-card px-5 py-3 text-sm">
+            {user ? (
+              <div className="space-y-2">
+                <p className="text-xs uppercase tracking-[0.2em] text-tavern-muted">
+                  Você está logado
+                </p>
+                <p className="text-white">{user.email}</p>
+                <Link
+                  href="/logout"
+                  className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-tavern-accent"
+                >
+                  Sair
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-tavern-accent"
+              >
+                Entrar
+                <span aria-hidden="true">→</span>
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
       <div className="grid gap-4 md:grid-cols-3">
         {shortcuts.map((shortcut) => (
