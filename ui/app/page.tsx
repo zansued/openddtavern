@@ -3,14 +3,9 @@ import { createClient } from "@/lib/supabase/server";
 
 const shortcuts = [
   {
-    title: "Personagens",
-    description: "Acompanhe suas fichas salvas e criações futuras.",
-    href: "/personagens"
-  },
-  {
-    title: "Personagem (Demo)",
-    description: "Veja uma ficha de personagem com dados mockados.",
-    href: "/personagem/demo"
+    title: "Criar personagem",
+    description: "Comece uma nova ficha e registre seus heróis.",
+    href: "/personagens/novo"
   },
   {
     title: "Campanhas",

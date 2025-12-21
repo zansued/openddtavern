@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/browser";
 
 type Feedback = {
@@ -9,12 +10,15 @@ type Feedback = {
 } | null;
 
 export default function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [feedback, setFeedback] = useState<Feedback>(null);
   const [loading, setLoading] = useState(false);
+  const nextPath = searchParams.get("next") || "/";
 
   const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,10 +39,11 @@ export default function LoginPage() {
     } else {
       setFeedback({
         type: "success",
-        message:
-          "Conta criada com sucesso! Verifique seu e-mail caso a confirmação seja necessária."
+        message: "Conta criada com sucesso! Redirecionando..."
       });
       setSignUpPassword("");
+      router.replace(nextPath);
+      router.refresh();
     }
 
     setLoading(false);
@@ -63,9 +68,11 @@ export default function LoginPage() {
     } else {
       setFeedback({
         type: "success",
-        message: "Login realizado! Você já pode voltar ao dashboard."
+        message: "Login realizado! Redirecionando..."
       });
       setSignInPassword("");
+      router.replace(nextPath);
+      router.refresh();
     }
 
     setLoading(false);

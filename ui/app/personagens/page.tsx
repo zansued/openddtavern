@@ -15,7 +15,7 @@ export default async function PersonagensPage() {
   return (
     <section className="space-y-6">
       <div className="rounded-2xl border border-white/10 bg-tavern-surface p-6">
-        <h2 className="text-2xl font-semibold">Seus personagens</h2>
+        <h2 className="text-2xl font-semibold">Minhas fichas</h2>
         <p className="mt-2 text-sm text-tavern-muted">
           Área reservada para personagens cadastrados. Em breve você poderá
           gerenciar suas fichas aqui.
@@ -23,13 +23,13 @@ export default async function PersonagensPage() {
       </div>
       <div className="rounded-2xl border border-white/10 bg-tavern-card p-6">
         <p className="text-sm text-tavern-muted">
-          Quer ver um exemplo? Acesse a ficha demo para explorar o layout.
+          Pronto para começar? Crie uma nova ficha e personalize seus heróis.
         </p>
         <Link
-          href="/personagem/demo"
+          href="/personagens/novo"
           className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-tavern-accent"
         >
-          Ver ficha demo
+          Criar personagem
           <span aria-hidden="true">→</span>
         </Link>
       </div>
