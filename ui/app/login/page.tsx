@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/browser";
 
@@ -9,7 +9,7 @@ type Feedback = {
   message: string;
 } | null;
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [signUpEmail, setSignUpEmail] = useState("");
@@ -110,6 +110,7 @@ export default function LoginPage() {
               E-mail
               <input
                 type="email"
+                autoComplete="email"
                 required
                 value={signUpEmail}
                 onChange={(event) => setSignUpEmail(event.target.value)}
@@ -121,6 +122,7 @@ export default function LoginPage() {
               Senha
               <input
                 type="password"
+                autoComplete="new-password"
                 required
                 value={signUpPassword}
                 onChange={(event) => setSignUpPassword(event.target.value)}
@@ -148,6 +150,7 @@ export default function LoginPage() {
               E-mail
               <input
                 type="email"
+                autoComplete="email"
                 required
                 value={signInEmail}
                 onChange={(event) => setSignInEmail(event.target.value)}
@@ -159,6 +162,7 @@ export default function LoginPage() {
               Senha
               <input
                 type="password"
+                autoComplete="current-password"
                 required
                 value={signInPassword}
                 onChange={(event) => setSignInPassword(event.target.value)}
@@ -177,5 +181,22 @@ export default function LoginPage() {
         </form>
       </div>
     </section>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="space-y-6">
+          <div className="rounded-2xl border border-white/10 bg-tavern-surface p-6">
+            <h2 className="text-2xl font-semibold">Entrar ou criar conta</h2>
+            <p className="mt-2 text-sm text-tavern-muted">Carregando...</p>
+          </div>
+        </section>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }
