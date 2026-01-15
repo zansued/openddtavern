@@ -110,6 +110,7 @@ function LoginForm() {
               E-mail
               <input
                 type="email"
+                autoComplete="email"
                 required
                 value={signUpEmail}
                 onChange={(event) => setSignUpEmail(event.target.value)}
@@ -121,6 +122,7 @@ function LoginForm() {
               Senha
               <input
                 type="password"
+                autoComplete="new-password"
                 required
                 value={signUpPassword}
                 onChange={(event) => setSignUpPassword(event.target.value)}
@@ -148,6 +150,7 @@ function LoginForm() {
               E-mail
               <input
                 type="email"
+                autoComplete="email"
                 required
                 value={signInEmail}
                 onChange={(event) => setSignInEmail(event.target.value)}
@@ -159,6 +162,7 @@ function LoginForm() {
               Senha
               <input
                 type="password"
+                autoComplete="current-password"
                 required
                 value={signInPassword}
                 onChange={(event) => setSignInPassword(event.target.value)}
