@@ -1,9 +1,8 @@
+import type { Character } from "../../src/players/character";
+
 type DefensesPanelProps = {
-  hp: {
-    max: number;
-    current: number;
-    temp: number;
-  };
+  personagem: Pick<Character, "pontosVidaAtual" | "pontosVidaMaximo">;
+  pontosVidaTemporario?: number;
   armorClass: number;
   initiativeBonus: number;
   speed: string;
@@ -12,7 +11,8 @@ type DefensesPanelProps = {
 };
 
 export default function DefensesPanel({
-  hp,
+  personagem,
+  pontosVidaTemporario = 0,
   armorClass,
   initiativeBonus,
   speed,
@@ -27,9 +27,9 @@ export default function DefensesPanel({
             PV
           </p>
           <p className="mt-2 text-xl font-semibold text-white">
-            {hp.current}/{hp.max}
+            {personagem.pontosVidaAtual}/{personagem.pontosVidaMaximo}
           </p>
-          <p className="text-xs text-tavern-muted">Temp {hp.temp}</p>
+          <p className="text-xs text-tavern-muted">Temp {pontosVidaTemporario}</p>
         </div>
         <div className="rounded-xl border border-white/10 bg-tavern-card p-4">
           <p className="text-xs uppercase tracking-[0.3em] text-tavern-muted">
