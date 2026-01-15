@@ -1,11 +1,8 @@
-type Skill = {
-  name: string;
-  bonus: number;
-};
+import type { AtributoDetalhado } from "../../src/players/atributos";
 
 type SkillsListProps = {
   title: string;
-  skills?: Skill[];
+  skills?: AtributoDetalhado[];
 };
 
 export default function SkillsList({ title, skills }: SkillsListProps) {
@@ -14,10 +11,10 @@ export default function SkillsList({ title, skills }: SkillsListProps) {
       <h3 className="text-sm font-semibold text-white">{title}</h3>
       <ul className="mt-3 space-y-2 text-sm text-tavern-muted">
         {(skills ?? []).map((skill) => (
-          <li key={skill.name} className="flex items-center justify-between">
-            <span>{skill.name}</span>
+          <li key={skill.nome} className="flex items-center justify-between">
+            <span>{skill.nome}</span>
             <span className="text-white">
-              {skill.bonus >= 0 ? `+${skill.bonus}` : skill.bonus}
+              {skill.valor >= 0 ? `+${skill.valor}` : skill.valor}
             </span>
           </li>
         ))}
